@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SkillSwap Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body.dark-mode {
+      background-color: #2b2c38;
+      color: #f2f2f2;
+    }
+    body.dark-mode .navbar,
+    body.dark-mode .card,
+    body.dark-mode footer {
+      background-color: #393a4a;
+      color: #f2f2f2;
+    }
+    body.dark-mode .badge {
+      background-color: #9c88ff;
+    }
+    body.dark-mode .quick-buttons button {
+      background-color: #4b4b5a;
+      color: #f2f2f2;
+      border-color: #6a6a80;
+    }
+    body.dark-mode .skill-tags span {
+      background-color: #555568;
+      color: #f2f2f2;
+    }
+    .profile-pic {
+      background: #5c2eff;
+      color: white;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+    }
+.logout-btn {
+  background: transparent;
+  color: #5c2eff;
+  border: 1px solid #5c2eff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 10px;
+}
+.logout-btn:hover {
+  background-color: #5c2eff;
+  color: white;
+}
+
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Skill<span>Swap</span></div>
+    <nav class="nav-links">
+      <a class="active" href="#">Dashboard</a>
+      <a href="browse.html">Browse Skills</a>
+      <a href="myswap.html">My Swaps</a>
+      <a href="user-profile.html">Profile</a>
+    </nav>
+    <div class="nav-icons">
+  <div class="profile-pic" id="profileInitial">U</div>
+  <button id="darkToggle" class="dark-toggle">🌙</button>
+  <a href="logout.html" class="logout-btn">Logout</a>
+</div>
+  </header>
+
+  <section class="welcome">
+    <div class="container">
+      <h2 id="welcomeName">Welcome back, John Doe! 👋</h2>
+      <p>Ready to share your skills and learn something new today?</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <main class="dashboard">
+      <div class="card profile">
+        <div class="profile-photo"></div>
+        <h3 id="userName">John Doe</h3>
+        <p id="userLocation">📍 San Francisco, CA</p>
+        <p><span id="userRating">⭐ 4.8</span> (<span id="userSwaps">12</span> swaps)</p>
+        <div class="progress-bar"><div id="profileProgress" class="progress" style="width: 85%;"></div></div>
+        <p>Profile Completion: <span id="profileCompletion">85%</span></p>
+        <button>Edit Profile</button>
+      </div>
+
+      <div class="stats-column">
+        <div class="card stats">
+          <div class="stats-icon purple">👥</div>
+          <div class="stats-text">
+            <p class="stats-label">Total Swaps</p>
+            <p class="stats-value" id="statsSwaps">12</p>
+          </div>
+        </div>
+        <div class="card stats">
+          <div class="stats-icon green">📈</div>
+          <div class="stats-text">
+            <p class="stats-label">Rating</p>
+            <p class="stats-value" id="statsRating">4.8</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card activity">
+        <h3>Recent Activity</h3>
+        <ul>
+          <li><span class="done">✔</span> Completed JS tutoring with Sarah <small>2 hrs ago</small></li>
+          <li><span class="pending">⚠</span> New React request from Mike <small>5 hrs ago</small></li>
+          <li><span class="msg">💬</span> Message from Emma (Python) <small>1 day ago</small></li>
+        </ul>
+      </div>
+
+      <div class="card swaps">
+        <h3>Pending Swaps</h3>
+        <div class="swap">
+          <div class="swap-photo"></div>
+          <div>
+            <strong>Sarah Chen</strong><br />
+            Spanish ⇄ Web Dev<br />
+            <span class="badge pending">Pending</span>
+          </div>
+        </div>
+        <div class="swap">
+          <div class="swap-photo"></div>
+          <div>
+            <strong>Mike Johnson</strong><br />
+            Guitar ⇄ React<br />
+            <span class="badge accepted">Accepted</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card matches">
+        <h3>Suggested Matches</h3>
+        <div class="match">
+          <div class="match-photo"></div>
+          <div>
+            <strong>Emma Wilson</strong> ⭐ 4.9<br />
+            Offers: Python<br />
+            Wants: JS, React<br />
+            <button>Connect</button>
+          </div>
+        </div>
+        <div class="match">
+          <div class="match-photo"></div>
+          <div>
+            <strong>David Kim</strong> ⭐ 4.7<br />
+            Offers: Guitar<br />
+            Wants: Photoshop<br />
+            <button>Connect</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card skills">
+        <h3>Your Skills</h3>
+        <p class="skill-label">Skills I Offer</p>
+        <div class="skill-tags green" id="skillsOffered"></div>
+        <p class="skill-label">Skills I Want</p>
+        <div class="skill-tags purple" id="skillsWanted"></div>
+        <p class="availability" id="userAvailability">🕒 Weekends & Evenings</p>
+      </div>
+
+      <div class="card actions">
+        <h3>Quick Actions</h3>
+        <div class="quick-buttons">
+          <button>👥 Browse Skills</button>
+          <button>➕ Add Skills</button>
+        </div>
+      </div>
+
+      <div class="card tips">
+        <h3>💡 Platform Tips</h3>
+        <ul>
+          <li><strong>Complete profile</strong> for more swaps</li>
+          <li><strong>Be specific</strong> about skills</li>
+          <li><strong>Stay active</strong> & respond fast</li>
+        </ul>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <div><strong>SkillSwap</strong><br />Learn by sharing skills.</div>
+    <div>
+      <strong>Platform</strong><br />
+      How it Works<br />
+      Safety Guidelines<br />
+      Community
+    </div>
+    <div>
+      <strong>Support</strong><br />
+      Help Center<br />
+      Contact Us<br />
+      Feedback
+    </div>
+    <div class="copyright">
+      © 2024 SkillSwap. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById("darkToggle");
+    const body = document.body;
+
+    if (localStorage.getItem("darkMode") === "enabled") {
+      body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+    }
+
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+        toggle.textContent = "☀️";
+      } else {
+        localStorage.setItem("darkMode", "disabled");
+        toggle.textContent = "🌙";
+      }
+    });
+
+    const user = JSON.parse(localStorage.getItem("userData"));
+    if (user) {
+      document.getElementById("welcomeName").innerText = `Welcome back, ${user.name}! 👋`;
+      document.getElementById("userName").innerText = user.name;
+      document.getElementById("userLocation").innerText = `📍 ${user.location}`;
+      document.getElementById("userRating").innerText = `⭐ ${user.rating}`;
+      document.getElementById("userSwaps").innerText = user.swaps;
+      document.getElementById("profileProgress").style.width = `${user.profileCompletion}%`;
+      document.getElementById("profileCompletion").innerText = `${user.profileCompletion}%`;
+      document.getElementById("statsSwaps").innerText = user.swaps;
+      document.getElementById("statsRating").innerText = user.rating;
+      document.getElementById("skillsOffered").innerHTML = user.skillsOffered.map(skill => `<span>${skill}</span>`).join('');
+      document.getElementById("skillsWanted").innerHTML = user.skillsWanted.map(skill => `<span>${skill}</span>`).join('');
+      document.getElementById("userAvailability").innerText = `🕒 ${user.availability}`;
+      document.getElementById("profileInitial").innerText = user.name.charAt(0).toUpperCase();
+    }
+  </script>
+</body>
+</html>

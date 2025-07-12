@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Profile - SkillSwap</title>
+  <style>
+    body {
+      background: #1e1e2f;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background-color: #2a2a3d;
+      border-bottom: 1px solid #444;
+    }
+    .navbar .left-nav a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: underline;
+    }
+    .navbar .left-nav .save {
+      color: #00ff00;
+    }
+    .navbar .left-nav .discard {
+      color: #ff5555;
+    }
+    .navbar .right-nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .navbar .profile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: #ccc;
+      overflow: hidden;
+    }
+    .navbar .profile-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .profile-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #2a2a3d;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px #000;
+    }
+
+    .profile-form label {
+      display: block;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .profile-form input[type="text"],
+    .profile-form select,
+    .profile-form input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #888;
+      background: #444;
+      color: white;
+      margin-top: 5px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background-color: #333;
+      border: 2px dashed #999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-size: 14px;
+      text-align: center;
+      margin-left: auto;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .profile-photo a {
+      color: #34c6f3;
+      text-decoration: none;
+    }
+    .profile-photo a.remove {
+      color: #ff5555;
+      margin-left: 5px;
+    }
+
+    .save-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .save-buttons button {
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .discard-btn {
+      background-color: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="left-nav">
+      <a href="#" class="save" onclick="saveProfile()">Save</a>
+      <a href="#" class="discard" onclick="loadProfile()">Discard</a>
+      <a href="#">Swap request</a>
+      <a href="home.html">Home</a>
+    </div>
+    <div class="right-nav">
+      <div class="profile-icon">
+        <img src="https://via.placeholder.com/36" alt="User" />
+      </div>
+    </div>
+  </header>
+
+  <div class="profile-container">
+    <form class="profile-form" id="profileForm">
+      <div class="form-row">
+        <div style="flex: 1;">
+          <label for="name">Name</label>
+          <input type="text" id="name" placeholder="Your name" value="" />
+
+          <label for="location">Location</label>
+          <input type="text" id="location" placeholder="City, Country" value="" />
+
+          <label for="skillsOffered">Skills Offered (comma separated)</label>
+          <input type="text" id="skillsOffered" placeholder="e.g. HTML, Photoshop" value="" />
+
+          <label for="availability">Availability</label>
+          <input type="text" id="availability" placeholder="e.g. Weekends" value="" />
+
+          <label for="profileVisibility">Profile</label>
+          <select id="profileVisibility">
+            <option value="Public">Public</option>
+            <option value="Private">Private</option>
+          </select>
+        </div>
+
+        <div style="flex: 1;">
+          <div class="profile-photo" id="photoContainer">
+            <img id="profileImg" src="" style="display:none;" alt="Profile" />
+            <div id="photoText">Profile Photo</div>
+            <input type="file" id="photoUpload" accept="image/*" style="display:none;" onchange="handlePhotoUpload(event)" />
+            <div>
+              <a href="#" onclick="document.getElementById('photoUpload').click()">Add/Edit</a>
+              <a href="#" class="remove" onclick="removePhoto()">Remove</a>
+            </div>
+          </div>
+
+          <label for="skillsWanted">Skills Wanted (comma separated)</label>
+          <input type="text" id="skillsWanted" placeholder="e.g. Python, Angular" value="" />
+        </div>
+      </div>
+
+      <div class="save-buttons">
+        <button type="button" class="save-btn" onclick="saveProfile()">Save</button>
+        <button type="button" class="discard-btn" onclick="loadProfile()">Discard</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function saveProfile() {
+      const profile = {
+        name: document.getElementById('name').value,
+        location: document.getElementById('location').value,
+        skillsOffered: document.getElementById('skillsOffered').value,
+        skillsWanted: document.getElementById('skillsWanted').value,
+        availability: document.getElementById('availability').value,
+        profileVisibility: document.getElementById('profileVisibility').value,
+        profileImg: document.getElementById('profileImg').src
+      };
+      localStorage.setItem('userProfile', JSON.stringify(profile));
+      alert('Profile saved!');
+    }
+
+    function loadProfile() {
+      const profile = JSON.parse(localStorage.getItem('userProfile'));
+      if (profile) {
+        document.getElementById('name').value = profile.name || "";
+        document.getElementById('location').value = profile.location || "";
+        document.getElementById('skillsOffered').value = profile.skillsOffered || "";
+        document.getElementById('skillsWanted').value = profile.skillsWanted || "";
+        document.getElementById('availability').value = profile.availability || "";
+        document.getElementById('profileVisibility').value = profile.profileVisibility || "Public";
+        if (profile.profileImg && profile.profileImg !== "") {
+          document.getElementById('profileImg').src = profile.profileImg;
+          document.getElementById('profileImg').style.display = "block";
+          document.getElementById('photoText').style.display = "none";
+        } else {
+          document.getElementById('profileImg').src = "";
+          document.getElementById('profileImg').style.display = "none";
+          document.getElementById('photoText').style.display = "block";
+        }
+      } else {
+        document.getElementById('profileForm').reset();
+        document.getElementById('profileImg').src = "";
+        document.getElementById('profileImg').style.display = "none";
+        document.getElementById('photoText').style.display = "block";
+      }
+    }
+
+    function handlePhotoUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('profileImg').src = e.target.result;
+          document.getElementById('profileImg').style.display = "block";
+          document.getElementById('photoText').style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function removePhoto() {
+      document.getElementById('profileImg').src = "";
+      document.getElementById('profileImg').style.display = "none";
+      document.getElementById('photoText').style.display = "block";
+    }
+
+    window.onload = loadProfile;
+  </script>
+</body>
+</html>

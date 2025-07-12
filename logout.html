@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Logging Out...</title>
+  <meta http-equiv="refresh" content="2; url=login.html">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #f4f6fc;
+      color: #333;
+    }
+    .logout-box {
+      text-align: center;
+      padding: 30px;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .logout-box h2 {
+      margin-bottom: 10px;
+    }
+    .logout-box p {
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-box">
+    <h2>Logging you out...</h2>
+    <p>You will be redirected shortly.</p>
+  </div>
+
+  <script>
+    localStorage.removeItem("userData");
+    localStorage.removeItem("darkMode");
+    localStorage.removeItem("mySwaps");
+  </script>
+</body>
+</html>

@@ -1,0 +1,378 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f4f6fc;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2d2dff;
+}
+.logo span {
+  color: #34c6f3;
+}
+.nav-links a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #555;
+}
+.nav-links .active {
+  color: #5c2eff;
+  font-weight: bold;
+}
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.notification {
+  position: relative;
+}
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #5c2eff;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.profile-pic {
+  background: #5c2eff;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+}
+
+/* Welcome */
+.welcome {
+  background: linear-gradient(to right, #6e51f5, #33cfe8);
+  color: white;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+.welcome h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.welcome p {
+  font-size: 16px;
+}
+
+/* Dashboard */
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding-bottom: 30px;
+}
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+}
+
+/* Profile */
+.profile-photo,
+.match-photo,
+.swap-photo {
+  background: #ccc;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.progress-bar {
+  background: #eee;
+  height: 8px;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+.progress {
+  height: 100%;
+  background: #6e51f5;
+  border-radius: 5px;
+}
+
+/* Buttons */
+button {
+  background: #6e51f5;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+button:hover {
+  background: #563dd9;
+}
+
+/* Activity */
+.activity ul {
+  list-style: none;
+}
+.activity li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.done { color: green; }
+.pending { color: orange; }
+.msg { color: #00bcd4; }
+
+/* Swaps & Matches */
+.swap, .match {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.badge.pending {
+  background: orange;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.badge.accepted {
+  background: #6e51f5;
+  color: white;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+/* Skills */
+.skill-label {
+  font-weight: bold;
+  margin-top: 10px;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.skill-tags span {
+  background-color: #eee;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+.skill-tags.green span {
+  background-color: #e6f4ea;
+  color: #2d9d4d;
+}
+.skill-tags.purple span {
+  background-color: #f0e9ff;
+  color: #6b4ad0;
+}
+.availability {
+  font-size: 13px;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Quick Buttons */
+.quick-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.quick-buttons button {
+  flex: 1;
+  background: #f4f6fc;
+  color: #333;
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.quick-buttons button:hover {
+  background: #e5eaff;
+  border-color: #6e51f5;
+}
+
+/* Tips */
+.card.tips ul {
+  list-style: none;
+  margin-top: 10px;
+}
+.card.tips li {
+  background-color: #f7f7ff;
+  padding: 10px;
+  border-left: 4px solid #c3bfff;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.card.tips li:nth-child(2) {
+  background-color: #e9f7f3;
+  border-left-color: #4caf50;
+}
+.card.tips li:nth-child(3) {
+  background-color: #e8f4ff;
+  border-left-color: #03a9f4;
+}
+
+/* Stats (Smaller stacked) */
+.stats-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: fit-content;
+}
+.card.stats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  width: 200px;
+  height: 80px;
+  transition: transform 0.2s ease;
+}
+.card.stats:hover {
+  transform: translateY(-2px);
+}
+.stats-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.stats-icon.purple {
+  background-color: #ede8ff;
+  color: #6e51f5;
+}
+.stats-icon.green {
+  background-color: #e0f6e6;
+  color: #30a851;
+}
+.stats-text {
+  display: flex;
+  flex-direction: column;
+}
+.stats-label {
+  font-size: 12px;
+  color: #666;
+}
+.stats-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Footer */
+footer {
+  background-color: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 30px 20px;
+  font-size: 14px;
+  color: #555;
+}
+footer div {
+  margin: 10px 20px;
+}
+footer .copyright {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .welcome h2 {
+    font-size: 20px;
+  }
+
+  .quick-buttons {
+    flex-direction: column;
+  }
+}
+
+.dark-toggle {
+  background: transparent;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+body.dark-mode {
+  background-color: #1e1e2f;
+  color: #f0f0f0;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .card,
+body.dark-mode footer {
+  background-color: #2a2a3d;
+  color: #f0f0f0;
+  border-color: #444;
+}
+
+body.dark-mode .badge {
+  background-color: #8a6aff;
+}
+
+body.dark-mode .quick-buttons button {
+  background-color: #333;
+  color: #eee;
+  border-color: #555;
+}
+
+body.dark-mode .card.tips li {
+  background-color: #3b3b50;
+  border-left-color: #8a6aff;
+}
+
+body.dark-mode .skill-tags span {
+  background-color: #333;
+  color: #ddd;
+}

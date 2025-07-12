@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Swaps - SkillSwap</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body.dark-mode {
+      background-color: #2b2c38;
+      color: #f2f2f2;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .swap-section {
+      margin-bottom: 40px;
+    }
+    .swap-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .swap-details {
+      flex: 1;
+    }
+    .badge {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: white;
+      text-transform: capitalize;
+    }
+    .badge.pending { background-color: orange; }
+    .badge.accepted { background-color: #6e51f5; }
+    .badge.completed { background-color: green; }
+    .swap-actions button {
+      background: #6e51f5;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    body.dark-mode .swap-card {
+      background: #3a3a4a;
+      color: #f2f2f2;
+    }
+    body.dark-mode .swap-actions button {
+      background: #9c88ff;
+    }
+    .logout-btn {
+      background: transparent;
+      color: #5c2eff;
+      border: 1px solid #5c2eff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+    .logout-btn:hover {
+      background-color: #5c2eff;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">Skill<span>Swap</span></div>
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="browse.html">Browse Skills</a>
+      <a class="active" href="#">My Swaps</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+    <div class="nav-icons">
+      <div class="profile-pic" id="profileInitial">U</div>
+      <button id="darkToggle" class="dark-toggle">🌙</button>
+      <a href="logout.html" class="logout-btn">Logout</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>My Swaps</h2>
+
+    <div class="swap-section">
+      <h3>🔄 Pending</h3>
+      <div id="pendingSwaps"></div>
+    </div>
+
+    <div class="swap-section">
+      <h3>✅ Accepted</h3>
+      <div id="acceptedSwaps"></div>
+    </div>
+
+    <div class="swap-section">
+      <h3>📘 Completed</h3>
+      <div id="completedSwaps"></div>
+    </div>
+  </div>
+
+  <script>
+    const toggle = document.getElementById("darkToggle");
+    const body = document.body;
+    if (localStorage.getItem("darkMode") === "enabled") {
+      body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+    }
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      if (body.classList.contains("dark-mode")) {
+        localStorage.setItem("darkMode", "enabled");
+        toggle.textContent = "☀️";
+      } else {
+        localStorage.setItem("darkMode", "disabled");
+        toggle.textContent = "🌙";
+      }
+    });
+
+    const user = JSON.parse(localStorage.getItem("userData"));
+    if (user && user.name) {
+      document.getElementById("profileInitial").textContent = user.name.charAt(0).toUpperCase();
+    }
+
+    const swapData = JSON.parse(localStorage.getItem("mySwaps")) || [];
+    const sections = {
+      pending: document.getElementById("pendingSwaps"),
+      accepted: document.getElementById("acceptedSwaps"),
+      completed: document.getElementById("completedSwaps")
+    };
+
+    swapData.forEach(swap => {
+      const div = document.createElement("div");
+      div.className = "swap-card";
+      div.innerHTML = `
+        <div class="swap-details">
+          <strong>${swap.name}</strong><br>
+          You want: ${swap.want} | They want: ${swap.offer}<br>
+          Status: <span class="badge ${swap.status}">${swap.status}</span>
+        </div>
+        <div class="swap-actions">
+          <button>${swap.status === "accepted" ? "Chat" : swap.status === "completed" ? "Review" : "Cancel"}</button>
+        </div>
+      `;
+      sections[swap.status]?.appendChild(div);
+    });
+  </script>
+</body>
+</html>
